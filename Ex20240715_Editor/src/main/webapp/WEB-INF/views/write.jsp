@@ -53,8 +53,39 @@
 <script type="text/javascript">
 	$(function(){
 		// 아이디가 content인 요소를 에디터로 표현
-		$("#content").summernote();
+		$("#content").summernote({
+			
+			callbacks:{
+				onImageUpload: function(files, editor){ // 이미지가 에디터에 추가될 때 
+					for(let i=0; i<files.length; i++){
+						sendImage(files[i], editor);
+					}
+					
+				}
+			}
+		});
 	});
+	
+	function sendImage(file, editor){
+		let ff = new FormData();
+		
+		// 전송하고자 하는 이미지 파일을 파라미터로 설정
+		ff.append("file",file);
+		
+		// 비동기식 통신
+		$.ajax({
+			url:"saveImg",
+			data: ff,
+			type: "post",
+			contentType: false,
+			processData: false,
+			cache: false,
+			dataType: "json",
+		}).done(function(data){
+			console.log(data);
+			$("#content").summernote("editor.insertImage",data.url+"/"+data.fname);
+		});
+	}
 </script>
 </body>
 </html>
