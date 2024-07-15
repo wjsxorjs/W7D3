@@ -12,10 +12,12 @@
 	<select id="search" parameterType="Map" resultType="mybatis.vo.EmpVO">
 		SELECT *
 		FROM `emp`
-		<choose>
-			<when test="searchType == 1">WHERE empno = #{searchValue}</when>
-			<when test="searchType == 2">WHERE ename LIKE CONCAT('%',#{searchValue},'%')</when>
-			<when test="searchType == 3">WHERE deptno = #{searchValue}</when>
-		</choose>
+		<where>
+			<choose>
+				<when test="searchType == 1">empno = #{searchValue}</when>
+				<when test="searchType == 2">ename LIKE CONCAT('%',#{searchValue},'%')</when>
+				<when test="searchType == 3">deptno = #{searchValue}</when>
+			</choose>
+		</where>
 	</select>
 </mapper>

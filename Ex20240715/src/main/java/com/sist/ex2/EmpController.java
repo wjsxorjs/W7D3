@@ -33,12 +33,9 @@ public class EmpController {
 	}
 	
 	@RequestMapping("/emp_search")
-	public ModelAndView emp_search() {
+	public ModelAndView emp_search(String searchType, String searchValue) {
 		ModelAndView mv = new ModelAndView();
 		
-		String searchType = request.getParameter("searchType");
-		String searchValue = request.getParameter("searchValue");
-
 
 		EmpVO[] e_ar = e_dao.getSearch(searchType, searchValue);
 		
