@@ -41,6 +41,7 @@
 						</select>
 						<input type="text" name="searchValue" value="${searchValue }"/>
 						<button type="button" onclick="valid()">검색</button>
+						<button type="button" onclick="list()">전체</button>
 					</form>
 					</td>
 				</tr>
@@ -80,6 +81,13 @@
 		
 		
 		document.frm.submit();
+	}	
+	function list(){
+		document.forms[0].searchType.value = "";
+		document.forms[0].searchValue.value = "";
+		document.forms[0].action = "emp_list";
+		
+		document.forms[0].submit();
 	}	
 		
 	</script>
